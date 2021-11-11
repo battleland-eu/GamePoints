@@ -2,18 +2,21 @@ package su.nightexpress.gamepoints.data;
 
 import com.google.gson.reflect.TypeToken;
 import org.jetbrains.annotations.NotNull;
+import su.nexmedia.engine.api.data.AbstractUserDataHandler;
 import su.nexmedia.engine.data.DataTypes;
-import su.nexmedia.engine.data.IDataHandler;
 import su.nightexpress.gamepoints.GamePoints;
 import su.nightexpress.gamepoints.data.objects.PointUser;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.UUID;
 import java.util.function.Function;
 
-public class GamePointsData extends IDataHandler<GamePoints, PointUser> {
+public class GamePointsData extends AbstractUserDataHandler<GamePoints, PointUser> {
 
     private static GamePointsData instance;
 
@@ -50,26 +53,25 @@ public class GamePointsData extends IDataHandler<GamePoints, PointUser> {
     @Override
     protected void onTableCreate() {
         super.onTableCreate();
-        this.addColumn(TABLE_USERS, "purchases", DataTypes.STRING.build(this.dataType), "{}");
+        this.addColumn(this.tableUsers, "purchases", DataTypes.STRING.build(this.dataType));
     }
 
     @NotNull
     public Map<String, Integer> getUserBalance() {
         Map<String, Integer> map = new HashMap<>();
-        String sql = "SELECT `name`, `balance` FROM " + this.TABLE_USERS;
+        String sql = "SELECT `name`, `balance` FROM " + this.tableUsers;
 
-        this.con = this.getConnection();
-        try (Statement ps = con.createStatement()) {
-            ResultSet rs = ps.executeQuery(sql);
-            while (rs.next()) {
-                String name = rs.getString("name");
-                int balance = rs.getInt("balance");
+        try (Statement statement = this.getConnection().createStatement()) {
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                String name = resultSet.getString("name");
+                int balance = resultSet.getInt("balance");
 
                 map.put(name, balance);
             }
             return map;
-        } catch (SQLException e) {
-            plugin.error("SQL Error!");
+        }
+        catch (SQLException e) {
             e.printStackTrace();
             return map;
         }
@@ -90,6 +92,9 @@ public class GamePointsData extends IDataHandler<GamePoints, PointUser> {
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
         map.put("purchases", this.gson.toJson(user.getPurchases()));
         map.put("balance", String.valueOf(user.getBalance()));
+        if (this.hasColumn(this.tableUsers, "items")) {
+            map.put("items", "{}");
+        }
         return map;
     }
 

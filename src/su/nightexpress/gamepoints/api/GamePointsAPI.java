@@ -3,9 +3,9 @@ package su.nightexpress.gamepoints.api;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import su.nexmedia.engine.data.users.IUserManager;
 import su.nightexpress.gamepoints.GamePoints;
 import su.nightexpress.gamepoints.api.store.IPointStore;
+import su.nightexpress.gamepoints.data.UserManager;
 import su.nightexpress.gamepoints.data.objects.PointUser;
 import su.nightexpress.gamepoints.store.StoreManager;
 
@@ -15,7 +15,7 @@ public class GamePointsAPI {
 
     private static final GamePoints PLUGIN = GamePoints.getPlugin(GamePoints.class);
 
-    @Nullable
+    @NotNull
     public static PointUser getUserData(@NotNull Player player) {
         return PLUGIN.getUserManager().getOrLoadUser(player);
     }
@@ -36,7 +36,7 @@ public class GamePointsAPI {
     }
 
     @NotNull
-    public static IUserManager<GamePoints, PointUser> getUserManager() {
+    public static UserManager getUserManager() {
         return PLUGIN.getUserManager();
     }
 

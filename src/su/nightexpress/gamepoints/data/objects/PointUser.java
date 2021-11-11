@@ -2,8 +2,8 @@ package su.nightexpress.gamepoints.data.objects;
 
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import su.nexmedia.engine.api.data.AbstractUser;
 import su.nexmedia.engine.api.manager.IPlaceholder;
-import su.nexmedia.engine.data.users.IAbstractUser;
 import su.nexmedia.engine.utils.TimeUT;
 import su.nightexpress.gamepoints.GamePoints;
 import su.nightexpress.gamepoints.api.event.PointProductPurchaseEvent;
@@ -15,7 +15,7 @@ import java.util.*;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
-public class PointUser extends IAbstractUser<GamePoints> implements IPlaceholder {
+public class PointUser extends AbstractUser<GamePoints> implements IPlaceholder {
 
     private       int                            balance;
     private final Map<String, Map<String, Long>> purchases;

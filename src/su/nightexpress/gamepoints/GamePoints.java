@@ -1,7 +1,8 @@
 package su.nightexpress.gamepoints;
 
 import org.jetbrains.annotations.NotNull;
-import su.nexmedia.engine.NexDataPlugin;
+import su.nexmedia.engine.NexPlugin;
+import su.nexmedia.engine.api.data.UserDataHolder;
 import su.nexmedia.engine.commands.api.IGeneralCommand;
 import su.nexmedia.engine.hooks.Hooks;
 import su.nightexpress.gamepoints.commands.*;
@@ -15,7 +16,7 @@ import su.nightexpress.gamepoints.store.StoreManager;
 
 import java.sql.SQLException;
 
-public class GamePoints extends NexDataPlugin<GamePoints, PointUser> {
+public class GamePoints extends NexPlugin<GamePoints> implements UserDataHolder<GamePoints, PointUser> {
 
     private static GamePoints instance;
 
@@ -23,7 +24,9 @@ public class GamePoints extends NexDataPlugin<GamePoints, PointUser> {
     private Lang   lang;
 
     private StoreManager   storeManager;
+
     private GamePointsData dataHandler;
+    private UserManager userManager;
 
     public static GamePoints getInstance() {
         return instance;
@@ -48,12 +51,12 @@ public class GamePoints extends NexDataPlugin<GamePoints, PointUser> {
     }
 
     @Override
-    protected boolean setupDataHandlers() {
+    public boolean setupDataHandlers() {
         try {
             this.dataHandler = GamePointsData.getInstance(this);
             this.dataHandler.setup();
-        } catch (SQLException e) {
-            this.error("Could not initialize database!");
+        }
+        catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
@@ -113,5 +116,11 @@ public class GamePoints extends NexDataPlugin<GamePoints, PointUser> {
     @NotNull
     public GamePointsData getData() {
         return this.dataHandler;
+    }
+
+    @NotNull
+    @Override
+    public UserManager getUserManager() {
+        return userManager;
     }
 }
