@@ -9,7 +9,7 @@ import su.nightexpress.gamepoints.GamePoints;
 import su.nightexpress.gamepoints.Perms;
 import su.nightexpress.gamepoints.api.store.IPointProduct;
 import su.nightexpress.gamepoints.api.store.IPointStore;
-import su.nightexpress.gamepoints.data.objects.PointUser;
+import su.nightexpress.gamepoints.data.PointUser;
 
 import java.util.List;
 

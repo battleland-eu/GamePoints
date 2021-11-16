@@ -14,7 +14,7 @@ import su.nexmedia.engine.utils.ItemUT;
 import su.nightexpress.gamepoints.GamePoints;
 import su.nightexpress.gamepoints.api.store.IPointProduct;
 import su.nightexpress.gamepoints.config.Config;
-import su.nightexpress.gamepoints.data.objects.PointUser;
+import su.nightexpress.gamepoints.data.PointUser;
 
 import java.util.Map;
 import java.util.WeakHashMap;

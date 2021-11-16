@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.data.AbstractUserDataHandler;
 import su.nexmedia.engine.data.DataTypes;
 import su.nightexpress.gamepoints.GamePoints;
-import su.nightexpress.gamepoints.data.objects.PointUser;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

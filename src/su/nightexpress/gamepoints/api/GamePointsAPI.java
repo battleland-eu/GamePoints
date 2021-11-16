@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable;
 import su.nightexpress.gamepoints.GamePoints;
 import su.nightexpress.gamepoints.api.store.IPointStore;
 import su.nightexpress.gamepoints.data.UserManager;
-import su.nightexpress.gamepoints.data.objects.PointUser;
+import su.nightexpress.gamepoints.data.PointUser;
 import su.nightexpress.gamepoints.store.StoreManager;
 
 import java.util.Collection;

@@ -8,7 +8,7 @@ import su.nexmedia.engine.utils.PlayerUT;
 import su.nightexpress.gamepoints.GamePoints;
 import su.nightexpress.gamepoints.Perms;
 import su.nightexpress.gamepoints.config.Config;
-import su.nightexpress.gamepoints.data.objects.PointUser;
+import su.nightexpress.gamepoints.data.PointUser;
 
 import java.util.Arrays;
 import java.util.List;

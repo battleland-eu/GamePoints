@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.manager.api.event.ICancellableEvent;
 import su.nightexpress.gamepoints.api.store.IPointProduct;
 import su.nightexpress.gamepoints.api.store.IPointStore;
-import su.nightexpress.gamepoints.data.objects.PointUser;
+import su.nightexpress.gamepoints.data.PointUser;
 
 public class PointProductPurchaseEvent extends ICancellableEvent {
 

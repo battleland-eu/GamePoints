@@ -9,7 +9,7 @@ import su.nexmedia.engine.utils.StringUT;
 import su.nightexpress.gamepoints.GamePoints;
 import su.nightexpress.gamepoints.api.store.IPointProduct;
 import su.nightexpress.gamepoints.api.store.IPointStore;
-import su.nightexpress.gamepoints.data.objects.PointUser;
+import su.nightexpress.gamepoints.data.PointUser;
 
 import java.text.NumberFormat;
 import java.util.List;

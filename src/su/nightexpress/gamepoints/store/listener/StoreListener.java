@@ -8,7 +8,7 @@ import su.nightexpress.gamepoints.GamePoints;
 import su.nightexpress.gamepoints.api.event.PointProductPurchaseEvent;
 import su.nightexpress.gamepoints.api.store.IPointProduct;
 import su.nightexpress.gamepoints.config.Config;
-import su.nightexpress.gamepoints.data.objects.PointUser;
+import su.nightexpress.gamepoints.data.PointUser;
 import su.nightexpress.gamepoints.store.StoreManager;
 
 import java.io.BufferedWriter;

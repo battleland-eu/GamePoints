@@ -10,7 +10,7 @@ import su.nightexpress.gamepoints.config.Config;
 import su.nightexpress.gamepoints.config.Lang;
 import su.nightexpress.gamepoints.data.GamePointsData;
 import su.nightexpress.gamepoints.data.UserManager;
-import su.nightexpress.gamepoints.data.objects.PointUser;
+import su.nightexpress.gamepoints.data.PointUser;
 import su.nightexpress.gamepoints.hooks.PlaceholderAPIHook;
 import su.nightexpress.gamepoints.store.StoreManager;
 
