@@ -10,7 +10,8 @@ public class PointUserChangeBalanceEvent extends ICancellableEvent {
     private final int balanceOld;
     private final int balanceNew;
 
-    public PointUserChangeBalanceEvent(@NotNull PointUser user, int balanceOld, int balanceNew) {
+    public PointUserChangeBalanceEvent(boolean async, @NotNull PointUser user, int balanceOld, int balanceNew) {
+        super(async);
         this.user = user;
         this.balanceOld = balanceOld;
         this.balanceNew = balanceNew;

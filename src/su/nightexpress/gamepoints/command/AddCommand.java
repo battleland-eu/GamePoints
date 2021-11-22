@@ -1,11 +1,10 @@
-package su.nightexpress.gamepoints.commands;
+package su.nightexpress.gamepoints.command;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.commands.api.ISubCommand;
 import su.nexmedia.engine.utils.PlayerUT;
-import su.nexmedia.engine.utils.StringUT;
 import su.nightexpress.gamepoints.GamePoints;
 import su.nightexpress.gamepoints.Perms;
 import su.nightexpress.gamepoints.config.Config;
@@ -14,16 +13,16 @@ import su.nightexpress.gamepoints.data.PointUser;
 import java.util.Arrays;
 import java.util.List;
 
-public class SetCommand extends ISubCommand<GamePoints> {
+public class AddCommand extends ISubCommand<GamePoints> {
 
-    public SetCommand(@NotNull GamePoints plugin) {
-        super(plugin, new String[]{"set"}, Perms.CMD_SET);
+    public AddCommand(@NotNull GamePoints plugin) {
+        super(plugin, new String[]{"add"}, Perms.CMD_ADD);
     }
 
     @Override
     @NotNull
     public String description() {
-        return plugin.lang().Command_Set_Desc.getMsg();
+        return plugin.lang().Command_Add_Desc.getMsg();
     }
 
     @Override
@@ -34,12 +33,12 @@ public class SetCommand extends ISubCommand<GamePoints> {
     @Override
     @NotNull
     public String usage() {
-        return plugin.lang().Command_Set_Usage.getMsg();
+        return plugin.lang().Command_Add_Usage.getMsg();
     }
 
     @Override
     @NotNull
-    public List<String> getTab(@NotNull Player player, int i, @NotNull String[] args) {
+    public List<@NotNull String> getTab(@NotNull Player player, int i, @NotNull String[] args) {
         if (i == 1) {
             return PlayerUT.getPlayerNames();
         }
@@ -57,22 +56,26 @@ public class SetCommand extends ISubCommand<GamePoints> {
         }
 
         String userName = args[1];
+        int amount = this.getNumI(sender, args[2], 0);
+        if (amount <= 0) {
+            return;
+        }
+
         PointUser user = plugin.getUserManager().getOrLoadUser(userName, false);
         if (user == null) {
             this.errPlayer(sender);
             return;
         }
 
-        int amount = StringUT.getInteger(args[2], user.getBalance());
+        user.addPoints(amount);
 
-        user.setBalance(amount);
-
-        plugin.lang().Command_Set_Done_Sender.replace(Config.replacePlaceholders())
+        plugin.lang().Command_Add_Done_Sender
+                .replace(Config.replacePlaceholders())
                 .replace("%amount%", amount).replace(user.replacePlaceholders()).send(sender);
 
         Player player = user.getPlayer();
         if (player != null) {
-            plugin.lang().Command_Set_Done_User.replace(Config.replacePlaceholders())
+            plugin.lang().Command_Add_Done_User.replace(Config.replacePlaceholders())
                     .replace("%amount%", amount).send(player);
         }
     }

@@ -49,8 +49,6 @@ public class StoreView extends AbstractMenu<GamePoints> {
     @Override
     public void onPrepare(@NotNull Player player, @NotNull Inventory inventory) {
         PointUser user = plugin.getUserManager().getOrLoadUser(player);
-        if (user == null) return;
-
         for (IPointProduct product : this.store.getProducts()) {
             ItemStack item = product.getPreview();
             this.replaceProduct(item, product, user);

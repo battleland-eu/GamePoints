@@ -39,10 +39,6 @@ public class StoreConfirmation extends AbstractMenu<GamePoints> {
 
                 if (type2 == MenuItemType.CONFIRMATION_ACCEPT) {
                     PointUser user = plugin.getUserManager().getOrLoadUser(player);
-                    if (user == null) {
-                        player.closeInventory();
-                        return;
-                    }
                     user.purchaseProduct(player, product);
                     product.getStore().open(player);
                 }
@@ -83,8 +79,6 @@ public class StoreConfirmation extends AbstractMenu<GamePoints> {
         super.onItemPrepare(player, menuItem, item);
 
         PointUser user = plugin.getUserManager().getOrLoadUser(player);
-        if (user == null) return;
-
         IPointProduct product = this.productMap.get(player);
         if (product == null) return;
 

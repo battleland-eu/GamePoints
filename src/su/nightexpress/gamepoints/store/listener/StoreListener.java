@@ -18,11 +18,8 @@ import java.time.LocalDateTime;
 
 public class StoreListener extends AbstractListener<GamePoints> {
 
-    private final StoreManager storeManager;
-
     public StoreListener(@NotNull StoreManager storeManager) {
         super(storeManager.plugin());
-        this.storeManager = storeManager;
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

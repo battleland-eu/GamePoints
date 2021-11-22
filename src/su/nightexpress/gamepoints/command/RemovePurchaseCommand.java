@@ -1,4 +1,4 @@
-package su.nightexpress.gamepoints.commands;
+package su.nightexpress.gamepoints.command;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

@@ -1,4 +1,4 @@
-package su.nightexpress.gamepoints.commands;
+package su.nightexpress.gamepoints.command;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -70,11 +70,6 @@ public class PayCommand extends ISubCommand<GamePoints> {
 
         Player from = (Player) sender;
         PointUser userFrom = plugin.getUserManager().getOrLoadUser(from);
-        if (userFrom == null) {
-            plugin.lang().Error_NoData.replace("%player%", from.getName()).send(sender);
-            return;
-        }
-
         int amount = StringUT.getInteger(args[2], 0);
         if (amount <= 0) {
             plugin.lang().Error_Number.replace("%num%", args[2]).send(sender);

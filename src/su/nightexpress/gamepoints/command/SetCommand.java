@@ -1,4 +1,4 @@
-package su.nightexpress.gamepoints.commands;
+package su.nightexpress.gamepoints.command;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -14,16 +14,16 @@ import su.nightexpress.gamepoints.data.PointUser;
 import java.util.Arrays;
 import java.util.List;
 
-public class TakeCommand extends ISubCommand<GamePoints> {
+public class SetCommand extends ISubCommand<GamePoints> {
 
-    public TakeCommand(@NotNull GamePoints plugin) {
-        super(plugin, new String[]{"take"}, Perms.CMD_TAKE);
+    public SetCommand(@NotNull GamePoints plugin) {
+        super(plugin, new String[]{"set"}, Perms.CMD_SET);
     }
 
     @Override
     @NotNull
     public String description() {
-        return plugin.lang().Command_Take_Desc.getMsg();
+        return plugin.lang().Command_Set_Desc.getMsg();
     }
 
     @Override
@@ -34,7 +34,7 @@ public class TakeCommand extends ISubCommand<GamePoints> {
     @Override
     @NotNull
     public String usage() {
-        return plugin.lang().Command_Take_Usage.getMsg();
+        return plugin.lang().Command_Set_Usage.getMsg();
     }
 
     @Override
@@ -57,26 +57,22 @@ public class TakeCommand extends ISubCommand<GamePoints> {
         }
 
         String userName = args[1];
-        int amount = StringUT.getInteger(args[2], 0);
-        if (amount <= 0) {
-            plugin.lang().Error_Number.replace("%num%", args[2]).send(sender);
-            return;
-        }
-
         PointUser user = plugin.getUserManager().getOrLoadUser(userName, false);
         if (user == null) {
             this.errPlayer(sender);
             return;
         }
 
-        user.takePoints(amount);
+        int amount = StringUT.getInteger(args[2], user.getBalance());
 
-        plugin.lang().Command_Take_Done_Sender.replace(Config.replacePlaceholders())
+        user.setBalance(amount);
+
+        plugin.lang().Command_Set_Done_Sender.replace(Config.replacePlaceholders())
                 .replace("%amount%", amount).replace(user.replacePlaceholders()).send(sender);
 
-        Player player = plugin.getServer().getPlayer(user.getName());
+        Player player = user.getPlayer();
         if (player != null) {
-            plugin.lang().Command_Take_Done_User.replace(Config.replacePlaceholders())
+            plugin.lang().Command_Set_Done_User.replace(Config.replacePlaceholders())
                     .replace("%amount%", amount).send(player);
         }
     }

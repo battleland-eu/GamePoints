@@ -1,10 +1,11 @@
-package su.nightexpress.gamepoints.commands;
+package su.nightexpress.gamepoints.command;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.commands.api.ISubCommand;
 import su.nexmedia.engine.utils.PlayerUT;
+import su.nexmedia.engine.utils.StringUT;
 import su.nightexpress.gamepoints.GamePoints;
 import su.nightexpress.gamepoints.Perms;
 import su.nightexpress.gamepoints.config.Config;
@@ -13,16 +14,16 @@ import su.nightexpress.gamepoints.data.PointUser;
 import java.util.Arrays;
 import java.util.List;
 
-public class AddCommand extends ISubCommand<GamePoints> {
+public class TakeCommand extends ISubCommand<GamePoints> {
 
-    public AddCommand(@NotNull GamePoints plugin) {
-        super(plugin, new String[]{"add"}, Perms.CMD_ADD);
+    public TakeCommand(@NotNull GamePoints plugin) {
+        super(plugin, new String[]{"take"}, Perms.CMD_TAKE);
     }
 
     @Override
     @NotNull
     public String description() {
-        return plugin.lang().Command_Add_Desc.getMsg();
+        return plugin.lang().Command_Take_Desc.getMsg();
     }
 
     @Override
@@ -33,12 +34,12 @@ public class AddCommand extends ISubCommand<GamePoints> {
     @Override
     @NotNull
     public String usage() {
-        return plugin.lang().Command_Add_Usage.getMsg();
+        return plugin.lang().Command_Take_Usage.getMsg();
     }
 
     @Override
     @NotNull
-    public List<@NotNull String> getTab(@NotNull Player player, int i, @NotNull String[] args) {
+    public List<String> getTab(@NotNull Player player, int i, @NotNull String[] args) {
         if (i == 1) {
             return PlayerUT.getPlayerNames();
         }
@@ -56,8 +57,9 @@ public class AddCommand extends ISubCommand<GamePoints> {
         }
 
         String userName = args[1];
-        int amount = this.getNumI(sender, args[2], 0);
+        int amount = StringUT.getInteger(args[2], 0);
         if (amount <= 0) {
+            plugin.lang().Error_Number.replace("%num%", args[2]).send(sender);
             return;
         }
 
@@ -67,15 +69,14 @@ public class AddCommand extends ISubCommand<GamePoints> {
             return;
         }
 
-        user.addPoints(amount);
+        user.takePoints(amount);
 
-        plugin.lang().Command_Add_Done_Sender
-                .replace(Config.replacePlaceholders())
+        plugin.lang().Command_Take_Done_Sender.replace(Config.replacePlaceholders())
                 .replace("%amount%", amount).replace(user.replacePlaceholders()).send(sender);
 
-        Player player = user.getPlayer();
+        Player player = plugin.getServer().getPlayer(user.getName());
         if (player != null) {
-            plugin.lang().Command_Add_Done_User.replace(Config.replacePlaceholders())
+            plugin.lang().Command_Take_Done_User.replace(Config.replacePlaceholders())
                     .replace("%amount%", amount).send(player);
         }
     }

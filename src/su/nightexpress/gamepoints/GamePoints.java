@@ -5,12 +5,12 @@ import su.nexmedia.engine.NexPlugin;
 import su.nexmedia.engine.api.data.UserDataHolder;
 import su.nexmedia.engine.commands.api.IGeneralCommand;
 import su.nexmedia.engine.hooks.Hooks;
-import su.nightexpress.gamepoints.commands.*;
+import su.nightexpress.gamepoints.command.*;
 import su.nightexpress.gamepoints.config.Config;
 import su.nightexpress.gamepoints.config.Lang;
 import su.nightexpress.gamepoints.data.GamePointsData;
-import su.nightexpress.gamepoints.data.UserManager;
 import su.nightexpress.gamepoints.data.PointUser;
+import su.nightexpress.gamepoints.data.UserManager;
 import su.nightexpress.gamepoints.hooks.PlaceholderAPIHook;
 import su.nightexpress.gamepoints.store.StoreManager;
 

@@ -1,5 +1,6 @@
 package su.nightexpress.gamepoints.data;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.api.data.AbstractUser;
@@ -64,7 +65,7 @@ public class PointUser extends AbstractUser<GamePoints> implements IPlaceholder 
     }
 
     public void setBalance(int balance) {
-        PointUserChangeBalanceEvent balanceEvent = new PointUserChangeBalanceEvent(this, this.getBalance(), balance);
+        PointUserChangeBalanceEvent balanceEvent = new PointUserChangeBalanceEvent(!Bukkit.isPrimaryThread(), this, this.getBalance(), balance);
         plugin.getPluginManager().callEvent(balanceEvent);
         if (balanceEvent.isCancelled()) return;
 
