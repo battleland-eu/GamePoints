@@ -4,16 +4,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import su.nexmedia.engine.api.config.JYML;
 import su.nexmedia.engine.api.menu.AbstractMenu;
 import su.nexmedia.engine.api.menu.IMenuItem;
 import su.nexmedia.engine.api.menu.MenuItem;
 import su.nexmedia.engine.api.menu.MenuItemType;
-import su.nexmedia.engine.config.api.JYML;
-import su.nexmedia.engine.utils.ItemUT;
+import su.nexmedia.engine.utils.ItemUtil;
 import su.nightexpress.gamepoints.GamePoints;
 import su.nightexpress.gamepoints.api.store.IPointStore;
 
-public class StoreMainMenu extends AbstractMenu<GamePoints> {
+public class StoreMainMenu
+        extends AbstractMenu<GamePoints> {
 
     public StoreMainMenu(@NotNull GamePoints plugin) {
         super(plugin, JYML.loadOrExtract(plugin, "store.main.yml"), "");
@@ -55,7 +56,7 @@ public class StoreMainMenu extends AbstractMenu<GamePoints> {
         IPointStore store = plugin.getStoreManager().getStore(menuItem.getId());
         if (store == null) return;
 
-        ItemUT.replace(item, store.replacePlaceholders());
+        ItemUtil.replace(item, store.replacePlaceholders());
     }
 
     @Override

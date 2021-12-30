@@ -3,7 +3,6 @@ package su.nightexpress.gamepoints;
 import org.jetbrains.annotations.NotNull;
 import su.nexmedia.engine.NexPlugin;
 import su.nexmedia.engine.api.data.UserDataHolder;
-import su.nexmedia.engine.commands.api.IGeneralCommand;
 import su.nexmedia.engine.hooks.Hooks;
 import su.nightexpress.gamepoints.command.*;
 import su.nightexpress.gamepoints.config.Config;
@@ -16,7 +15,9 @@ import su.nightexpress.gamepoints.store.StoreManager;
 
 import java.sql.SQLException;
 
-public class GamePoints extends NexPlugin<GamePoints> implements UserDataHolder<GamePoints, PointUser> {
+public class GamePoints
+        extends NexPlugin<GamePoints>
+        implements UserDataHolder<GamePoints, PointUser> {
 
     private static GamePoints instance;
 

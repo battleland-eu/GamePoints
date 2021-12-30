@@ -1,7 +1,7 @@
 main: su.nightexpress.gamepoints.GamePoints
 version: 1.2.2
 name: GamePoints
-author: NightExpress
+author: "${authors}"
 desciption: Additional virtual currency with internal GUI shop.
 depend: [ NexEngine ]
 softdepend: [ PlaceholderAPI ]
